@@ -1,0 +1,120 @@
+[
+    {
+        "fecha_viaje":"2015-11-30",
+        "destino":"la cocotera",
+        "capacidad":30,
+        "codigo":"a001",
+        "estado":"2015",
+        "vendidos":3,
+        "tikets":[
+            {
+                "id":1,
+                "precio":300.000,
+                "estado":"vendido",
+                "pasajero":[
+                    {
+                        "nombres":"Christian Duban",
+                        "apellidos":"dachiardi Oliveros",
+                        "identificacion":"1.457.812.123",
+                        "telefono":"3002587896",
+                        "fecha_nacimiento":"27/06/88",
+                        "sexo":"M"
+
+                    }
+                ]
+            },
+            {
+                "id":2,
+                "precio":300.000,
+                "estado":"vendido",
+                "pasajero":[
+                    {
+                        "nombres":"Juan Carlos",
+                        "apellidos":"Velandia Ortiz",
+                        "identificacion":"88.254.569",
+                        "telefono":" 315784632",
+                        "fecha_nacimiento":"23/02/87",
+                        "sexo":"M"
+
+                    }
+                ]
+            },
+            {
+                "id":3,
+                "precio":300.000,
+                "estado":"Reservado",
+                "pasajero":[
+                    {
+                        "nombres":"Martha",
+                        "apellidos":"Lopez Pumarejo",
+                        "identificacion":"43.213.578",
+                        "telefono":"6604598",
+                        "fecha_nacimiento":"31/05/85",
+                        "sexo":"F"
+
+                    }
+                ]
+            }
+        ]
+        
+    },
+        {
+        "fecha_viaje":"2015-12-31",
+        "destino":"la cocotera",
+        "capacidad":25,
+        "codigo":"b002",
+        "estado":"Aveo",
+        "vendidos":3,
+        "tikets":[
+            {
+                "id":1,
+                "precio":300.000,
+                "estado":"vendido",
+                "pasajero":[
+                    {
+                        "nombres":"Christian Duban",
+                        "apellidos":"dachiardi Oliveros",
+                        "identificacion":"1.457.812.123",
+                        "telefono":"3002587896",
+                        "fecha_nacimiento":"27/06/88",
+                        "sexo":"M"
+
+                    }
+                ]
+            },
+            {
+                "id":2,
+                "precio":300.000,
+                "estado":"vendido",
+                "pasajero":[
+                    {
+                        "nombres":"Juan Carlos",
+                        "apellidos":"Velandia Ortiz",
+                        "identificacion":"88.254.569",
+                        "telefono":" 315784632",
+                        "fecha_nacimiento":"23/02/87",
+                        "sexo":"M"
+
+                    }
+                ]
+            },
+            {
+                "id":3,
+                "precio":300.000,
+                "estado":"Reservado",
+                "pasajero":[
+                    {
+                        "nombres":"Martha",
+                        "apellidos":"Lopez Pumarejo",
+                        "identificacion":"43.213.578",
+                        "telefono":"6604598",
+                        "fecha_nacimiento":"31/05/85",
+                        "sexo":"F"
+
+                    }
+                ]
+            }
+        ]
+        
+    }
+]

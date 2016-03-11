@@ -1,0 +1,266 @@
+<!-- Header -->
+<div id="header" ng-include="'views/common/header.html'"></div>
+
+<!-- Navigation -->
+<aside id="menu" ng-include="'views/common/navigation.html'"></aside>
+
+
+<!-- Main Wrapper -->
+<div id="wrapper" ng-controller="viajesCtrl">
+
+
+    <div class="content" animate-panel>
+    <div class="panel-heading">
+         <i class=" fa fa-share-square-o icon_front"></i>
+         <span class="titulo">Viajes </span> <!-- {{test}} -->
+    </div>
+<!-- reservas-->
+<div class="row">
+    <div class="col-md-3">
+        <div class="hpanel">
+            <div class="panel-body">
+                <div class="m-b-md">
+                    <h4>
+                        Filtros de busqueda
+                    </h4>
+                    <small>
+                        Filtre de acuerdo a sus necesidades.
+                    </small>
+                </div>
+
+                <div class="form-group" ng-controller="DatepickerDemoCtrl">
+                    <label class="control-label">Fecha de viaje:</label>
+
+                    <div class="input-group">
+                        <input type="text" class="form-control" datepicker-popup="{{format}}" show-button-bar="false"
+                               ng-model="dt" is-open="opened" min-date="minDate" max-date="'2019-06-22'"
+                               datepicker-options="dateOptions" ng-required="true"
+                               close-text="Close"/>
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open($event)"><i
+                        class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+                    </div>
+                </div>
+                <div class="form-group" ng-controller="spinCtrl">
+                    <label class="control-label">Valor:</label>
+                    <div class="input-group">
+                        <input id="demo1" type="text"  name="demo1" touch-spin spin-options="spinOption1" ng-model="inputteresxcs">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Nave</label>
+                    <div class="input-group">
+                        <select class="form-control m-b" name="account">
+                            <option selected>Company and Brothers</option>
+                            <option>Morgan & Morgan Inc.</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group" ng-controller="spinCtrl">
+                    <label class="control-label">Cancelados</label>
+                    <div class="input-group">
+                        <input id="demo2" type="text"  name="demo1" touch-spin spin-options="spinOption2" ng-model="inputteresxcs">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Sin vender:</label>
+                    <div class="input-group">
+                        <div class="checkbox checkbox-primary">
+                            <input checked id="checkbox1" type="checkbox">
+                            <label for="checkbox1">
+                                Completado
+                            </label>
+                        </div>
+                        <div class="checkbox checkbox-success">
+                            <input id="checkbox2" type="checkbox">
+                            <label for="checkbox2">
+                                Reserva
+                            </label>
+                        </div>
+                       
+                    </div>
+                </div>
+
+
+                <button class="btn btn-success btn-block">Buscar</button>
+
+            </div>
+
+        </div>
+
+    </div>
+    <div class="col-md-9">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="hpanel">
+                    <div class="panel-body">
+                        <div class="input-group">
+                            <input class="form-control" type="text" placeholder="Buscar viaje" ng-model="buscador">
+                            <div class="input-group-btn">
+                                <button class="btn btn-default"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-lg-12">
+
+
+                <div class="hpanel " >
+                    
+                        <div class="panel-body">
+                                            <div class="table-responsive">
+
+                    <table cellpadding="1" cellspacing="1" class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Fecha</th>
+                            <th>Nave</th>
+                            <th>Destino</th>
+                            <th>Capacidad</th>
+                            <th>Vendidos</th>
+                            <th>Congelar</th>
+                            <th>Detalle</th>
+                            <th>Eliminar</th>
+                           
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="bus in viajes|filter:buscador|orderBy:tipoOrden">
+                            <td>vt-869</td>
+                            <td>05/27/2016</td>
+                            <td>Perla Negra</td>
+                            <td>La cocotera</td>
+                            <td>45</td>
+                            v<td>40</td>
+                             <td><button type="button" class="btn btn-info btn-xs" ng-click="detalleBus(bus.placa)"><span class="glyphicon glyphicon glyphicon-eye-open" aria-hidden="true"></span> Congelar</button></td>
+                                <td><button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modal_user" ng-click="detalleBus(bus.codigo)"><span class="glyphicon glyphicon glyphicon-eye-open" aria-hidden="true"></span> Ver</button></td>
+                                <td> <button type="button" class="btn btn-danger btn-xs" ng-click="eliminar(bus.codigo)"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Eliminar</button></td> 
+                           
+                            <!--
+
+                                <td>{{bus.codigo}}</td>
+                                <td>{{bus.fecha_viaje}}</td>
+                                <td>Default</td>
+                                <td>{{bus.destino}}</td>
+                                <td>{{bus.capacidad}}</td>
+                                <td>{{bus.vendidos}}</td>
+                                <td><button type="button" class="btn btn-info btn-xs" ng-click="detalleBus(bus.placa)"><span class="glyphicon glyphicon glyphicon-eye-open" aria-hidden="true"></span> Congelar</button></td>
+                                <td><button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modal_user" ng-click="detalleBus(bus.codigo)"><span class="glyphicon glyphicon glyphicon-eye-open" aria-hidden="true"></span> Ver</button></td>
+                                <td> <button type="button" class="btn btn-danger btn-xs" ng-click="eliminar(bus.codigo)"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Eliminar</button></td> 
+                                -->
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                        </div>
+                    
+                </div>
+            </div>
+
+
+
+        </div>
+
+
+    </div>
+      <!-- modal-->
+<div class="modal fade" id="modal_user" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
+  <div class="modal-dialog modal-max" role="document">
+    <div class="modal-content">
+    <form method="get" class="form-horizontal" ng-submit="agregar()">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel" ><strong> Viaje {{viaje.codigo}}</strong></h4>
+        <p>{{viaje.fecha_viaje}}, Destino {{viaje.destino}}. {{viaje.vendidos}} de {{viaje.capacidad}}</p>
+ 
+                                
+                               
+      </div>
+      <div class="modal-body">
+         <div class="hpanel">
+                  
+             <h3><strong>Pasajeros</strong></h3> <br>     
+                    
+
+                    <div class="row form_modal">
+                      <div class="row">
+                       <input class="form-control" type="text" placeholder="Buscar viaje" ng-model="buscador">
+                        <div class="table-responsive">
+
+                            <table cellpadding="1" cellspacing="1" class="table">
+                                <thead>
+                                <tr>
+                                    <th>Tiket</th>
+                                    <th>Valor</th>
+                                    <th>Estado</th>
+                                    <th>Identificación</th>
+                                    <th>Nombres</th>
+                                    <th>Apellidos</th>
+                                    <th>Teléfono</th>
+                                    <th>Fecha nacimiento</th>
+                                    <th>Sexo</th>
+                                   
+                                </tr>
+                                </thead>
+                                <tbody>
+                  <tr ng-class="{ 'text-danger': tiket.estado =='Reservado' }"  ng-repeat="tiket in viaje.tikets|filter:buscador|orderBy:tipoOrden">
+                                        <th>{{tiket.id}}</th>
+                                        <th>{{tiket.precio}}</th>
+                                        <td>{{tiket.estado}}</td>
+                                        <td>{{tiket.pasajero[0].identificacion}}</td>
+                                        <td>{{tiket.pasajero[0].nombres}}</td>
+                                        <td>{{tiket.pasajero[0].apellidos}}</td>
+                                        <td>{{tiket.pasajero[0].telefono}} </td>
+                                        <td>{{tiket.pasajero[0].fecha_nacimiento}} </td>
+                                        <td>{{tiket.pasajero[0].sexo}} </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                      </div>
+
+                     
+            </div>
+            </div>
+            </div>
+
+      <div class="modal-footer">
+         
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+      </div>
+    </form>
+
+   
+  </div>
+</div>
+</div>
+
+  <!-- fin modal -->
+
+
+
+</div>
+
+
+    </div>
+
+
+    <!-- Right sidebar -->
+    <div id="right-sidebar" ng-include="'views/common/right_sidebar.html'" class="sidebar-open" ng-show="rightSidebar"></div>
+
+    <!-- Footer -->
+    <footer class="footer" ng-include="'views/common/footer.html'"></footer>
+
+
+
+</div>
+
+
+

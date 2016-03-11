@@ -1,0 +1,213 @@
+<!-- Header -->
+<div id="header" ng-include="'views/common/header.html'"></div>
+
+<!-- Navigation -->
+<aside id="menu" ng-include="'views/common/navigation.html'"></aside>
+
+<!-- Main Wrapper -->
+<div id="wrapper" ng-controller="reservasCtrl">
+
+
+    <div class="content" animate-panel>
+            <div class="row">
+    <div class="col-lg-12">
+        <div class="hpanel">
+            <div class="panel-heading">
+                <i class=" fa glyphicon glyphicon-edit icon_front"></i>
+                <span class="titulo">Reservas </span>
+            </div>
+            <div class="panel-body">
+            <div class="row">
+            <div class="col-lg-12" >
+              
+                <div class="col-lg-12 agregar_viaje"ng-show="ver_agregar">
+                                     <div class="panel-body">
+                <form method="get" class="form-horizontal">
+                <div class="col-lg-6 col-xs-12 padding">
+                     
+                        <label for="date">Fecha:</label>
+                        <input type="date" class="form-control" id="date">
+                      
+                </div>
+                <div class="col-lg-6 col-xs-12 padding">
+                        <label for="date">Destino:</label>
+                        <select class="form-control" id="sel1">
+                            <option>La cocotera</option>
+                            <option>Playa grande</option>
+                            <option>Cocoliso</option>
+                        </select>
+                </div>
+                <div class="col-lg-6 col-xs-12 padding">
+                     
+                        <label for="date">Capacidad:</label>
+                        <input type="number" class="form-control" id="number">
+                      
+                </div>
+                <div class="col-lg-6 col-xs-12 padding">
+                        <label for="date">Nave:</label>
+                        <select class="form-control" id="sel1">
+                            <option>La cocotera</option>
+                            <option>Playa grande</option>
+                            <option>Cocoliso</option>
+                        </select>
+                </div>
+                <div class="col-lg-6 col-xs-12 padding">
+                        <label for="date">Valor:</label>
+                        <input type="number" class="form-control" id="valor">
+                </div>
+                
+
+                <div class="hr-line-dashed"></div>
+                
+                    <div class="col-sm-12  padding text-left">
+                       
+                        <button class="btn btn-primary " type="submit">Guardar</button>
+                    </div>
+                
+                </form>
+                </div>
+                </div>
+                
+            </div>
+                
+                <div class="col-lg-8">
+                <div class="input-group buscador">
+                    <div class="input-group-addon">
+                        <span class="glyphicon glyphicon-search" aria-hidden="true"> </span>
+                    </div>
+                    <input class="form-control" type="text" placeholder="Buscar viaje" ng-model="buscador">
+                </div>
+                </div>
+            </div>
+           
+           {{}}
+                <div class="table-responsive">
+
+                    <table cellpadding="1" cellspacing="1" class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Tipo reserva</th>
+                            <th>Fecha reserva</th>
+                            <th>Costo total</th>
+                            <th>estado</th>
+                            <th>Cantidad tikets</th>
+                            
+                           
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="reserva in reservas|filter:buscador|orderBy:tipoOrden">
+                                <td>{{reserva.codigo}}</td>
+                                <td>{{reserva.tipo_reserva}}</td>
+                                <td>{{reserva.fecha_reserva}} </td>
+                                <td>{{reserva.costo_total}}</td>
+                                <td>{{reserva.estado}}</td>
+                                <td>{{reserva.cantidad_tikets}}</td>
+                                
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            <div class="panel-footer">
+               Lista de  Viajes
+            </div>
+        </div>
+    </div>
+  <!-- modal-->
+<div class="modal fade" id="modal_user" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
+  <div class="modal-dialog modal-max" role="document">
+    <div class="modal-content">
+    <form method="get" class="form-horizontal" ng-submit="agregar()">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel" ><strong> Viaje {{viaje.codigo}}</strong></h4>
+        <p>{{viaje.fecha_viaje}}, Destino {{viaje.destino}}. {{viaje.vendidos}} de {{viaje.capacidad}}</p>
+ 
+                                
+                               
+      </div>
+      <div class="modal-body">
+         <div class="hpanel">
+                  
+             <h3><strong>Pasajeros</strong></h3> <br>     
+                    
+
+                    <div class="row form_modal">
+                      <div class="row">
+                       <input class="form-control" type="text" placeholder="Buscar viaje" ng-model="buscador">
+                        <div class="table-responsive">
+
+                            <table cellpadding="1" cellspacing="1" class="table">
+                                <thead>
+                                <tr>
+                                    <th>Tiket</th>
+                                    <th>Valor</th>
+                                    <th>Estado</th>
+                                    <th>Identificación</th>
+                                    <th>Nombres</th>
+                                    <th>Apellidos</th>
+                                    <th>Teléfono</th>
+                                    <th>Fecha nacimiento</th>
+                                    <th>Sexo</th>
+                                   
+                                </tr>
+                                </thead>
+                                <tbody>
+                  <tr ng-class="{ 'text-danger': tiket.estado =='Reservado' }"  ng-repeat="tiket in viaje.tikets|filter:buscador|orderBy:tipoOrden">
+                                        <th>{{tiket.id}}</th>
+                                        <th>{{tiket.precio}}</th>
+                                        <td>{{tiket.estado}}</td>
+                                        <td>{{tiket.pasajero[0].identificacion}}</td>
+                                        <td>{{tiket.pasajero[0].nombres}}</td>
+                                        <td>{{tiket.pasajero[0].apellidos}}</td>
+                                        <td>{{tiket.pasajero[0].telefono}} </td>
+                                        <td>{{tiket.pasajero[0].fecha_nacimiento}} </td>
+                                        <td>{{tiket.pasajero[0].sexo}} </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                      </div>
+
+                     
+            </div>
+            </div>
+            </div>
+
+      <div class="modal-footer">
+         
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+      </div>
+    </form>
+
+   
+  </div>
+</div>
+</div>
+
+  <!-- fin modal -->
+
+
+
+
+</div>
+
+
+
+    </div>
+
+
+    <!-- Right sidebar -->
+    <div id="right-sidebar" ng-include="'views/common/right_sidebar.html'" class="sidebar-open" ng-show="rightSidebar"></div>
+
+    <!-- Footer -->
+    <footer class="footer" ng-include="'views/common/footer.html'"></footer>
+
+
+
+</div>
+

@@ -1,0 +1,18 @@
+[
+	{
+		"codigo":"ab123",
+		"tipo_reserva":"",
+		"fecha_reserva":"2016-03-03",
+		"costo_total":450.000,
+		"estado":"En reserva",
+		"cantidad_tikets":5
+	},
+	{
+		"codigo":"cd321",
+		"tipo_reserva":"",
+		"fecha_reserva":"2016-03-03",
+		"costo_total":200.000,
+		"estado":"Pago",
+		"cantidad_tikets":2
+	}
+]
