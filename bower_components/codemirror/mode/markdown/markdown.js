@@ -51,36 +51,24 @@ CodeMirror.defineMode("markdown", function(cmCfg, modeCfg) {
   if (modeCfg.strikethrough === undefined)
     modeCfg.strikethrough = false;
 
-  // Allow token types to be overridden by user-provided token types.
-  if (modeCfg.tokenTypeOverrides === undefined)
-    modeCfg.tokenTypeOverrides = {};
-
   var codeDepth = 0;
 
-  var tokenTypes = {
-    header: "header",
-    code: "comment",
-    quote: "quote",
-    list1: "variable-2",
-    list2: "variable-3",
-    list3: "keyword",
-    hr: "hr",
-    image: "tag",
-    formatting: "formatting",
-    linkInline: "link",
-    linkEmail: "link",
-    linkText: "link",
-    linkHref: "string",
-    em: "em",
-    strong: "strong",
-    strikethrough: "strikethrough"
-  };
-
-  for (var tokenType in tokenTypes) {
-    if (tokenTypes.hasOwnProperty(tokenType) && modeCfg.tokenTypeOverrides[tokenType]) {
-      tokenTypes[tokenType] = modeCfg.tokenTypeOverrides[tokenType];
-    }
-  }
+  var header   = 'header'
+  ,   code     = 'comment'
+  ,   quote    = 'quote'
+  ,   list1    = 'variable-2'
+  ,   list2    = 'variable-3'
+  ,   list3    = 'keyword'
+  ,   hr       = 'hr'
+  ,   image    = 'tag'
+  ,   formatting = 'formatting'
+  ,   linkinline = 'link'
+  ,   linkemail = 'link'
+  ,   linktext = 'link'
+  ,   linkhref = 'string'
+  ,   em       = 'em'
+  ,   strong   = 'strong'
+  ,   strikethrough = 'strikethrough';
 
   var hrRE = /^([*\-_])(?:\s*\1){2,}\s*$/
   ,   ulRE = /^[*\-+]\s+/
@@ -164,7 +152,7 @@ CodeMirror.defineMode("markdown", function(cmCfg, modeCfg) {
       if (prevLineIsIndentedCode || lineIsEmpty(state.prevLine)) {
         state.indentation -= 4;
         state.indentedCode = true;
-        return tokenTypes.code;
+        return code;
       } else {
         return null;
       }
@@ -190,7 +178,7 @@ CodeMirror.defineMode("markdown", function(cmCfg, modeCfg) {
       return switchInline(stream, state, footnoteLink);
     } else if (stream.match(hrRE, true)) {
       state.hr = true;
-      return tokenTypes.hr;
+      return hr;
     } else if ((lineIsEmpty(state.prevLine) || prevLineIsList) && (stream.match(ulRE, false) || stream.match(olRE, false))) {
       var listType = null;
       if (stream.match(ulRE, true)) {
@@ -235,7 +223,7 @@ CodeMirror.defineMode("markdown", function(cmCfg, modeCfg) {
   }
 
   function local(stream, state) {
-    if (state.fencedChars && stream.match(state.fencedChars, false)) {
+    if (stream.sol() && state.fencedChars && stream.match(state.fencedChars, false)) {
       state.localMode = state.localState = null;
       state.f = state.block = leavingLocal;
       return null;
@@ -243,7 +231,7 @@ CodeMirror.defineMode("markdown", function(cmCfg, modeCfg) {
       return state.localMode.token(stream, state.localState);
     } else {
       stream.skipToEnd();
-      return tokenTypes.code;
+      return code;
     }
   }
 
@@ -264,22 +252,22 @@ CodeMirror.defineMode("markdown", function(cmCfg, modeCfg) {
     var styles = [];
 
     if (state.formatting) {
-      styles.push(tokenTypes.formatting);
+      styles.push(formatting);
 
       if (typeof state.formatting === "string") state.formatting = [state.formatting];
 
       for (var i = 0; i < state.formatting.length; i++) {
-        styles.push(tokenTypes.formatting + "-" + state.formatting[i]);
+        styles.push(formatting + "-" + state.formatting[i]);
 
         if (state.formatting[i] === "header") {
-          styles.push(tokenTypes.formatting + "-" + state.formatting[i] + "-" + state.header);
+          styles.push(formatting + "-" + state.formatting[i] + "-" + state.header);
         }
 
         // Add `formatting-quote` and `formatting-quote-#` for blockquotes
         // Add `error` instead if the maximum blockquote nesting depth is passed
         if (state.formatting[i] === "quote") {
           if (!modeCfg.maxBlockquoteDepth || modeCfg.maxBlockquoteDepth >= state.quote) {
-            styles.push(tokenTypes.formatting + "-" + state.formatting[i] + "-" + state.quote);
+            styles.push(formatting + "-" + state.formatting[i] + "-" + state.quote);
           } else {
             styles.push("error");
           }
@@ -297,36 +285,38 @@ CodeMirror.defineMode("markdown", function(cmCfg, modeCfg) {
     }
 
     if (state.linkHref) {
-      styles.push(tokenTypes.linkHref, "url");
+      styles.push(linkhref, "url");
     } else { // Only apply inline styles to non-url text
-      if (state.strong) { styles.push(tokenTypes.strong); }
-      if (state.em) { styles.push(tokenTypes.em); }
-      if (state.strikethrough) { styles.push(tokenTypes.strikethrough); }
-      if (state.linkText) { styles.push(tokenTypes.linkText); }
-      if (state.code) { styles.push(tokenTypes.code); }
+      if (state.strong) { styles.push(strong); }
+      if (state.em) { styles.push(em); }
+      if (state.strikethrough) { styles.push(strikethrough); }
+
+      if (state.linkText) { styles.push(linktext); }
+
+      if (state.code) { styles.push(code); }
     }
 
-    if (state.header) { styles.push(tokenTypes.header, tokenTypes.header + "-" + state.header); }
+    if (state.header) { styles.push(header); styles.push(header + "-" + state.header); }
 
     if (state.quote) {
-      styles.push(tokenTypes.quote);
+      styles.push(quote);
 
       // Add `quote-#` where the maximum for `#` is modeCfg.maxBlockquoteDepth
       if (!modeCfg.maxBlockquoteDepth || modeCfg.maxBlockquoteDepth >= state.quote) {
-        styles.push(tokenTypes.quote + "-" + state.quote);
+        styles.push(quote + "-" + state.quote);
       } else {
-        styles.push(tokenTypes.quote + "-" + modeCfg.maxBlockquoteDepth);
+        styles.push(quote + "-" + modeCfg.maxBlockquoteDepth);
       }
     }
 
     if (state.list !== false) {
       var listMod = (state.listDepth - 1) % 3;
       if (!listMod) {
-        styles.push(tokenTypes.list1);
+        styles.push(list1);
       } else if (listMod === 1) {
-        styles.push(tokenTypes.list2);
+        styles.push(list2);
       } else {
-        styles.push(tokenTypes.list3);
+        styles.push(list3);
       }
     }
 
@@ -382,8 +372,7 @@ CodeMirror.defineMode("markdown", function(cmCfg, modeCfg) {
       stream.next();
       if (modeCfg.highlightFormatting) {
         var type = getType(state);
-        var formattingEscape = tokenTypes.formatting + "-escape";
-        return type ? type + " " + formattingEscape : formattingEscape;
+        return type ? type + " formatting-escape" : "formatting-escape";
       }
     }
 
@@ -397,7 +386,7 @@ CodeMirror.defineMode("markdown", function(cmCfg, modeCfg) {
       matchCh = (matchCh+'').replace(/([.?*+^$[\]\\(){}|-])/g, "\\$1");
       var regex = '^\\s*(?:[^' + matchCh + '\\\\]+|\\\\\\\\|\\\\.)' + matchCh;
       if (stream.match(new RegExp(regex), true)) {
-        return tokenTypes.linkHref;
+        return linkhref;
       }
     }
 
@@ -428,7 +417,7 @@ CodeMirror.defineMode("markdown", function(cmCfg, modeCfg) {
     if (ch === '!' && stream.match(/\[[^\]]*\] ?(?:\(|\[)/, false)) {
       stream.match(/\[[^\]]*\]/);
       state.inline = state.f = linkHref;
-      return tokenTypes.image;
+      return image;
     }
 
     if (ch === '[' && stream.match(/.*\](\(.*\)| ?\[.*\])/, false)) {
@@ -454,7 +443,7 @@ CodeMirror.defineMode("markdown", function(cmCfg, modeCfg) {
       } else {
         type = "";
       }
-      return type + tokenTypes.linkInline;
+      return type + linkinline;
     }
 
     if (ch === '<' && stream.match(/^[^> \\]+@(?:[^\\>]|\\.)+>/, false)) {
@@ -466,7 +455,7 @@ CodeMirror.defineMode("markdown", function(cmCfg, modeCfg) {
       } else {
         type = "";
       }
-      return type + tokenTypes.linkEmail;
+      return type + linkemail;
     }
 
     if (ch === '<' && stream.match(/^(!--|\w)/, false)) {
@@ -575,12 +564,12 @@ CodeMirror.defineMode("markdown", function(cmCfg, modeCfg) {
       } else {
         type = "";
       }
-      return type + tokenTypes.linkInline;
+      return type + linkinline;
     }
 
     stream.match(/^[^>]+/, true);
 
-    return tokenTypes.linkInline;
+    return linkinline;
   }
 
   function linkHref(stream, state) {
@@ -620,7 +609,7 @@ CodeMirror.defineMode("markdown", function(cmCfg, modeCfg) {
   }
 
   function footnoteLink(stream, state) {
-    if (stream.match(/^([^\]\\]|\\.)*\]:/, false)) {
+    if (stream.match(/^[^\]]*\]:/, false)) {
       state.f = footnoteLinkInside;
       stream.next(); // Consume [
       if (modeCfg.highlightFormatting) state.formatting = "link";
@@ -639,9 +628,9 @@ CodeMirror.defineMode("markdown", function(cmCfg, modeCfg) {
       return returnType;
     }
 
-    stream.match(/^([^\]\\]|\\.)+/, true);
+    stream.match(/^[^\]]+/, true);
 
-    return tokenTypes.linkText;
+    return linktext;
   }
 
   function footnoteUrl(stream, state) {
@@ -658,7 +647,7 @@ CodeMirror.defineMode("markdown", function(cmCfg, modeCfg) {
       stream.match(/^(?:\s+(?:"(?:[^"\\]|\\\\|\\.)+"|'(?:[^'\\]|\\\\|\\.)+'|\((?:[^)\\]|\\\\|\\.)+\)))?/, true);
     }
     state.f = state.inline = inlineNormal;
-    return tokenTypes.linkHref + " url";
+    return linkhref + " url";
   }
 
   var savedInlineRE = [];
@@ -712,7 +701,7 @@ CodeMirror.defineMode("markdown", function(cmCfg, modeCfg) {
         f: s.f,
 
         prevLine: s.prevLine,
-        thisLine: s.thisLine,
+        thisLine: s.this,
 
         block: s.block,
         htmlState: s.htmlState && CodeMirror.copyState(htmlMode, s.htmlState),

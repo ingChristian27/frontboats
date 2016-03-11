@@ -89,8 +89,8 @@
       tags.script.unshift(["type", configScript[i].matches, configScript[i].mode])
 
     function html(stream, state) {
-      var tagName = state.htmlState.tagName && state.htmlState.tagName.toLowerCase();
-      var tagInfo = tagName && tags.hasOwnProperty(tagName) && tags[tagName];
+      var tagName = state.htmlState.tagName;
+      var tagInfo = tagName && tags[tagName.toLowerCase()];
 
       var style = htmlMode.token(stream, state.htmlState), modeSpec;
 

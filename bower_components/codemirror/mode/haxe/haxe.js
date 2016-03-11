@@ -191,20 +191,13 @@ CodeMirror.defineMode("haxe", function(config, parserConfig) {
     pass.apply(null, arguments);
     return true;
   }
-  function inList(name, list) {
-    for (var v = list; v; v = v.next)
-      if (v.name == name) return true;
-    return false;
-  }
   function register(varname) {
     var state = cx.state;
     if (state.context) {
       cx.marked = "def";
-      if (inList(varname, state.localVars)) return;
+      for (var v = state.localVars; v; v = v.next)
+        if (v.name == varname) return;
       state.localVars = {name: varname, next: state.localVars};
-    } else if (state.globalVars) {
-      if (inList(varname, state.globalVars)) return;
-      state.globalVars = {name: varname, next: state.globalVars};
     }
   }
 
@@ -387,10 +380,11 @@ CodeMirror.defineMode("haxe", function(config, parserConfig) {
   }
 
   // Interface
+
   return {
     startState: function(basecolumn) {
       var defaulttypes = ["Int", "Float", "String", "Void", "Std", "Bool", "Dynamic", "Array"];
-      var state = {
+      return {
         tokenize: haxeTokenBase,
         reAllowed: true,
         kwAllowed: true,
@@ -401,9 +395,6 @@ CodeMirror.defineMode("haxe", function(config, parserConfig) {
         context: parserConfig.localVars && {vars: parserConfig.localVars},
         indented: 0
       };
-      if (parserConfig.globalVars && typeof parserConfig.globalVars == "object")
-        state.globalVars = parserConfig.globalVars;
-      return state;
     },
 
     token: function(stream, state) {
