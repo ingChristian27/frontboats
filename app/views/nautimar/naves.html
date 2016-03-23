@@ -17,10 +17,6 @@
                 
                 <span class="titulo">Naves </span>
                
-                <div ng-repeat="t in test.naves">
-                <pre>-->{{t}}</pre>
-                    
-                </div>
             </div>
             <div class="panel-body">
             <div class="row">
@@ -34,12 +30,11 @@
                 </div>
                 <div class="col-lg-4 text-right">
                  <button type="button" class="btn w-xs btn-success btn-sm"  data-toggle="modal" data-target="#modal_user"> </span> Agregar</button>
-                 <button type="button" class="btn w-xs btn-success btn-sm"  ng-click="peticion()"> </span> TEST</button>
 
                 </div>
             </div>
            
-        
+       
                 <div class="table-responsive">
 
                     <table cellpadding="1" cellspacing="1" class="table">
@@ -54,7 +49,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="nave in naves|filter:buscador|orderBy:tipoOrden">
+                            <tr ng-repeat="nave in test.naves|filter:buscador|orderBy:tipoOrden">
                                 
                                 <td>{{nave.nombre}}</td>
                                 <td>{{nave.eslora}}</td>
@@ -80,22 +75,23 @@
                         <img src="images/a3.jpg" alt="profile-picture">
                     </a>
                     <div class="media-body">
-                        <small><span class="font-bold">Empresa </span> {{b.empresa_transporte}} </small>
+                        <small><span class="font-bold">{{b.nombre}}</span> Capacidad {{b.pax}} </small>
                         <br/>
-                        <small class="text-muted"> {{b.placa}} </small>
+                        <small class="text-muted"> {{b.modelo}} </small>
                     </div>
                 </div>
             </div>
             <div class="panel-body">
                 <strong><h4>Datos Basicos</h4></strong> 
                 <div class="row">
+                   
                       <div class="col-lg-6">
                         <strong> Marca: </strong>
                         <spam> {{b.marca}} </spam>
                       </div>
                       <div class="col-lg-6">
-                        <strong> Referencia: </strong>
-                        <spam> {{b.referencia}} </spam> <br>
+                        <strong> Potencia: </strong>
+                        <spam> {{b.potencia}} </spam> <br>
                       </div>
                       <div class="col-lg-6">
                         <strong> Modelo: </strong>
@@ -103,7 +99,7 @@
                       </div>
                       <div class="col-lg-6">
                         <strong> No. Motor: </strong>
-                        <spam> {{b.n_motor}} </spam> <br>
+                        <spam> {{b.cant_motores}} </spam> <br>
                       </div>
                       <div class="col-lg-6">
                         <strong> Color: </strong>
@@ -111,81 +107,35 @@
                       </div>
                       <div class="col-lg-6">
                         <strong> Capacidad: </strong>
-                        <spam> {{b.capacidad}}  </spam> <br>
+                        <spam> {{b.pax}}  </spam> <br>
                       </div>
                          <div class="col-lg-6">
-                        <strong> Cap peso: </strong>
-                        <spam>  {{b.c_peso}} </spam> <br>
+                        <strong> Eslora: </strong>
+                        <spam>  {{b.eslora}} </spam> <br>
                       </div>
                       <div class="col-lg-6">
-                        <strong> No. Peso: </strong>
-                        <spam> {{b.n_peso}} </spam> <br>
+                        <strong> Matricula: </strong>
+                        <spam> {{b.matricula}} </spam> <br>
                       </div>
                       <div class="col-lg-6">
-                        <strong> Aseguradora: </strong>
-                        <spam> {{b.aseguradora}} </spam> <br>
+                        <strong> Sonido: </strong>
+                        <spam> {{b.sonido}} </spam> <br>
                       </div>
                       <div class="col-lg-6">
-                        <strong> Expedición: </strong>
-                        <spam> {{b.f_expedicion}} </spam> <br>
+                        <strong> Nevera: </strong>
+                        <spam> {{b.nevera}} </spam> <br>
                       </div>
                       <div class="col-lg-6">
-                        <strong> Expiración: </strong>
-                        <spam> {{b.f_expiracion}}  </spam> <br>
+                        <strong> Chalecos: </strong>
+                        <spam> {{b.chalecos}}  </spam> <br>
                       </div>
                 </div>
                
                 
             </div>
-            <div class="panel-body">
-              <strong><h4>Seguros adicionales</h4></strong>
-               <div class="row">
-                      <div class="col-lg-12">
-                        <strong> No Poliza: </strong>
-                        <spam> {{b.n_poliza}} </spam>
-                      </div>
-                      <div class="col-lg-6">
-                        <strong> Cobertura: </strong>
-                        <spam> {{b.cobertura}} </spam> <br>
-                      </div>
-                      <div class="col-lg-6">
-                        <strong> Aseguradora: </strong>
-                        <spam> {{b.aseguradora}} </spam> <br>
-                      </div>
-                     <div class="col-lg-6">
-                        <strong> Expedición: </strong>
-                        <spam> {{b.f_expedicion}} </spam> <br>
-                      </div>
-                      <div class="col-lg-6">
-                        <strong> Expiración: </strong>
-                        <spam> {{b.f_expiracion}}  </spam> <br>
-                      </div>
-                </div>
-            </div>
-            <div class="panel-body">
-              <strong><h4>Revisión Tecnomécanica</h4></strong>
-              <div class="row">
-                
-                  <div class="col-lg-12">
-                    <strong> No. Certificado: </strong>
-                    <spam> {{b.n_certificado}} </spam>
-                  </div>
-                  <div class="col-lg-6">
-                    <strong> última realización: </strong>
-                    <spam> {{b.tecno_f_realizacion}} </spam> <br>
-                  </div>
-                  <div class="col-lg-6">
-                    <strong> Expedido por: </strong>
-                    <spam> {{b.expedido_p}} </spam> <br>
-                  </div>
-                  <div class="col-lg-6">
-                    <strong> Expiración: </strong>
-                    <spam> {{b.tecno_f_expiracion}}  </spam> <br>
-                  </div>
-              </div>
-            </div>
+            
             <div class="panel-footer">  
-                <i class="fa fa-eye"> </i> Detalle Bus
+                <i class="fa fa-eye"> </i> Detalle Nave
             </div>
         </div>
     </div>

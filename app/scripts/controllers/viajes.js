@@ -8,18 +8,18 @@ angular
     .module('homer')
     .controller('viajesCtrl', viajesCtrl)
 
-function viajesCtrl($scope, $http ) {
+function viajesCtrl($scope, $http, serviceViaje ) {
 
+    //Cargamos el servidor con las naves existentes
+    serviceViaje
+        .getAll()
+        .then(function(data) {
+            $scope.data = data;
+        })
+        .catch(function(err){
 
-  $http.get("http://botescartagena.azurewebsites.net/naves")
-    .then(function(response) {
-        $scope.viajes  = response.data;
-        $scope.test  = response.data;
-    });
-    console.log($scope.myWelcome);
-   /* Viajes.getAll(function(data){
-        $scope.viajes  = data;
-    })*/
+        }) 
+
 
 $scope.ver_agregar = false;
 
