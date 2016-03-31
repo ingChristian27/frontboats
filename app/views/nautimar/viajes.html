@@ -95,7 +95,11 @@
             <div class="col-lg-12">
                 <div class="hpanel">
                     <div class="panel-body">
-                    <button>Agregar</button>
+                    <div class="col-lg-12 text-right container_btn_right">
+                        <button type="button" class="btn btn-default btn-xs btn_viaje" data-toggle="modal" data-target="#agregar_viaje" >Crear viaje</button>    
+                    </div>
+                    
+
                         <div class="input-group">
                             <input class="form-control" type="text" placeholder="Buscar viaje" ng-model="buscador">
                             <div class="input-group-btn">
@@ -246,6 +250,56 @@
   <!-- fin modal -->
 
 
+<!-- Modal agregar viaje  -->
+
+<div class="modal fade" id="agregar_viaje" tabindex="-1" role="dialog"  >
+  <div class="modal-dialog modal-max" role="document">
+    <div class="modal-content">
+    <form method="get" class="form-horizontal" ng-submit="agregar()">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Crear Viaje  </h4>
+      </div>
+            <div class="modal-body">
+                <div class="hpanel">
+                      <div class="row">
+                            <legend>Datos Basicos</legend>
+                            <div class="col-lg-6">
+                                <label >Fecha</label>
+                                <input type="date" class="form-control" ng-model="fecha" >
+                            </div>
+                            <div class="col-lg-6">
+                                <label >Capacidad</label>
+                                <input type="number" class="form-control" ng-model="capacidad">
+                            </div>
+                            <div class="col-lg-6">
+                                <label >Nave </label>
+                                <select class="form-control" ng-model="condigo_nave">
+                                    <option ng-repeat="nave in data.naves " value="{{nave.id}}">{{nave.nombre }}</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-6">
+                                <label >Destino</label>
+                                <select class="form-control" ng-model="destino">
+                                    <option></option>
+                                </select>
+                            </div>
+                        </div>
+                    
+                </div>
+            </div>
+      <div class="modal-footer">
+          <button class="btn btn-primary" type="submit" ng-click="agregarViaje()">Guardar</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      </div>
+    </form>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- fin modal agregrar viaje -->
 
 </div>
 

@@ -48,6 +48,13 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider) {
                 pageTitle: 'Analytics'
             }
         })
+        .state('destinos', {
+            url: "/destinos",
+            templateUrl: "views/nautimar/destinos.html",
+            data: {
+                pageTitle: 'destinos'
+            }
+        })
         .state('reservas', {
             url: "/reservas",
             templateUrl: "views/nautimar/reservas.html",

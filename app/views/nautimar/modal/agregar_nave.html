@@ -1,0 +1,113 @@
+<div class="inmodal">
+    <div class="color-line"></div>
+    <div class="modal-header">
+        <h4 class="modal-title">Creación de nave</h4>
+        <small class="font-bold">Ingrese los datos de la embarcación agregar en el sistema, recuerde que cada nave tiene un nombre y matricula unico.</small>
+    </div>
+    <div class="modal-body modal_boat">
+                           
+                      <div class="row">
+                            <legend>Datos Basicos</legend>
+                            <div class="col-lg-4">
+                                <label for="">Nombre</label>
+                                <input type="text" class="form-control" ng-model="nombre" >
+                            </div>
+                            <div class="col-lg-4">
+                                <label for="">Matricula</label>
+                                <input type="text" class="form-control" ng-model="matricula" >
+                            </div>
+                            <div class="col-lg-4">
+                                <label for="">Pax</label>
+                                <input type="number" class="form-control"ng-model="pax"  >
+                            </div>
+                            <div class="col-lg-4">
+                                <label for="">descripción</label>
+                                <input type="text" class="form-control"ng-model="descripcion"  >
+                            </div>
+                            <div class="col-lg-4">
+                                <label for="">Modelo</label>
+                                <input type="text" class="form-control" ng-model="modelo" >
+                            </div>
+                             <div class="col-lg-4">
+                                <label for="">Color</label>
+                                <input type="text" class="form-control"ng-model="color" >
+                            </div>
+                             <div class="col-lg-4">
+                                <label for="">Tipo</label>
+                                <input type="text" class="form-control" ng-model="tipo" >
+                            </div>
+                            <div class="col-lg-4">
+                                <label for="">Canttidad motores</label>
+                                <input type="number" class="form-control" ng-model="cant_motores" >
+                            </div>
+                            <div class="col-lg-4">
+                                <label for="">potencia</label>
+                                <input type="text" class="form-control" ng-model="potencia" >
+                            </div>
+                            <div class="col-lg-4">
+                                <label for="">Marca</label>
+                                <input type="text" class="form-control" ng-model="marca" >
+                            </div>
+                            <div class="col-lg-4">
+                                <label for="">Eslora</label>
+                                <input type="text" class="form-control" ng-model="eslora" >
+                            </div>
+                            <div class="col-lg-4">
+                                <label for="">Combustible</label>
+                                <input type="text" class="form-control" ng-model="combustible" >
+                            </div>
+                            <div class="col-lg-4">
+                                <label for="">Chalecos</label>
+                                <input type="number" class="form-control" ng-model="chalecos" >
+                            </div>
+                            <div class="col-lg-4">
+                                <label for="">radio VHFn</label>
+                                <input type="number" class="form-control" ng-model="radio_vhf" >
+                            </div>
+                            <div class="col-lg-4">
+                                <label for="">Nevera</label>
+                                <input type="text" class="form-control" ng-model="nevera" >
+                            </div>
+                            <div class="col-lg-4">
+                            <label for="">Carpa</label>
+                                <input type="text" class="form-control" ng-model="carpa" >
+                            </div>
+                        <div class="col-lg-4">
+                            <label for="">Sonido</label>
+                            <input type="text" class="form-control" ng-model="sonido" >
+                        </div>
+                       
+                           
+                        </div>
+                       
+
+
+                     <div class="row">
+
+                         <legend>Pilotos</legend>
+                         <div class="col-lg-4">
+                            <label for="">Nombre Piloto</label>
+                            <input type="text" class="form-control" ng-model="nombre_piloto" >
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="">Licencia piloto</label>
+                            <input type="text" class="form-control" ng-model="licencia_piloto" >
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="">Nombre Copiloto</label>
+                            <input type="text" class="form-control" ng-model="nombre_copiloto" >
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="">Licencia Copiloto</label>
+                            <input type="text" class="form-control" ng-model="licencia_copiloto" >
+                        </div>
+                    </div>
+                     
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" ng-click="cancel()">Close</button>
+        <button type="button" class="btn btn-primary" ng-click="ok()">Save changes</button>
+    </div>
+</div>
+
+

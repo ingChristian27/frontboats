@@ -1,43 +1,25 @@
 /**
  *
- * Estudiante
+ * Destinos
  *
  */
 
 angular
     .module('homer')
-    .controller('navesCtrl', navesCtrl)
+    .controller('destinosCtrl', destinosCtrl)
 
 
 
-function navesCtrl($scope, $http, serviceNave, $modal ) {
+function destinosCtrl($scope, $http, serviceDestino, $modal ) {
    
 
    // INICIANDO VALORES
     $scope.nombre='';
-    $scope.modelo='';
-    $scope.color='';
-    $scope.tipo ='';
-    $scope.cant_motores =0;
-    $scope.potencia ='';
-    $scope.marca ='';
-    $scope.eslora ='';
-    $scope.combustible ='';
-    $scope.matricula ='';
-    $scope.pax =0;
-    $scope.chalecos =0;
-    $scope.radio_vhf =0;
-    $scope.nevera =0;
-    $scope.carpa ='';
-    $scope.sonido ='';
-    $scope.piloto ='';
-    $scope.licencia_piloto ='';
-    $scope.copiloto ='';
-    $scope.licencia_copiloto ='';
-    $scope.descripcion ='';
-    
+    $scope.distancia='';
+    $scope.descripcion='';
+
     //Cargamos el servidor con las naves existentes
-    serviceNave
+    serviceDestino
         .getAll()
         .then(function(data) {
             $scope.test = data;
@@ -46,48 +28,22 @@ function navesCtrl($scope, $http, serviceNave, $modal ) {
 
         }) 
 
-     $scope.open3 = function (size) {
-        var modalInstance = $modal.open({
-            templateUrl: 'views/nautimar/modal/agregar_nave.html',
-            size: size,
-            controller: ModalInstanceCtrl,
-        });
-    };
-
-
+     
     $scope.agregar = function(){
        
         //  Creamos el json con los elementos agregar en la nava
-        var addnave = {
+
+        var addDestino = {
             nombre : $scope.nombre,
-            modelo : $scope.modelo,
-            color : $scope.color,
-            tipo : $scope.tipo,
-            cant_motores : $scope.cant_motores,
-            potencia : $scope.potencia,
-            marca : $scope.marca,
-            eslora : $scope.eslora,
-            combustible : $scope.combustible,
-            matricula : $scope.matricula,
-            pax : $scope.pax,
-            chalecos : $scope.chalecos,
-            radio_vhf : $scope.radio_vhf,
-            nevera : $scope.nevera,
-            carpa : $scope.carpa,
-            sonido : $scope.sonido,
-            piloto : $scope.piloto,
-            licencia_piloto : $scope.licencia_piloto,
-            copiloto : $scope.copiloto,
-            licencia_copiloto : $scope.licencia_copiloto,
+            distancia : $scope.distancia,
             descripcion : $scope.descripcion
          };
-
         /* LLamamos al servicio de naves para enviar un json
         *   con los datos agregar al servidor
         *   responde un un nuevo json con el elemento agregado 
         */
-        serviceNave
-            .addNave(addnave)
+        serviceDestino
+            .addDestino(addDestino)
             .then(function(data) {
                 $scope.test = data;
             })
@@ -98,26 +54,8 @@ function navesCtrl($scope, $http, serviceNave, $modal ) {
          //  Iniciamos las variables del formulario para presentación.
         $('#modal_user').modal('hide');
         $scope.nombre='';
-        $scope.modelo='';
-        $scope.color='';
-        $scope.tipo ='';
-        $scope.cant_motores =0;
-        $scope.potencia ='';
-        $scope.marca ='';
-        $scope.eslora ='';
-        $scope.combustible ='';
-        $scope.matricula ='';
-        $scope.pax =0;
-        $scope.chalecos =0;
-        $scope.radio_vhf =0;
-        $scope.nevera =0;
-        $scope.carpa ='';
-        $scope.sonido ='';
-        $scope.piloto ='';
-        $scope.licencia_piloto ='';
-        $scope.copiloto ='';
-        $scope.licencia_copiloto ='';
-        $scope.descripcion ='';
+        $scope.distancia='';
+        $scope.descripcion='';
 
             
     }
@@ -244,5 +182,6 @@ function ModalInstanceCtrl ($scope, $modalInstance, serviceNave) {
         $modalInstance.dismiss('cancel');
     };
 };
+
 
 

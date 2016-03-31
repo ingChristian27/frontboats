@@ -1,15 +1,15 @@
-function serviceViaje($http, $q) {
+function serviceDestino($http, $q) {
 
     return {
         getAll: getAll,
-        addViaje: addViaje
+        addDestino: addDestino
     }
 
     function getAll () {
         var defered = $q.defer();
         var promise = defered.promise;
 
-        $http.get("http://botescartagena.azurewebsites.net/index-json")
+        $http.get("http://botescartagena.azurewebsites.net/destinosjson")
             .success(function(data) {
                 defered.resolve(data);
             })
@@ -19,12 +19,11 @@ function serviceViaje($http, $q) {
 
         return promise;
     }
-
-    function addViaje  (viaje) {
+    function addDestino  (destino) {
         var defered = $q.defer();
         var promise = defered.promise;
 
-        $http.post("http://botescartagena.azurewebsites.net/viajes", viaje)
+        $http.post("http://botescartagena.azurewebsites.net/destinos", destino)
             .success(function(data) {
                 defered.resolve(data);
             })
@@ -47,4 +46,6 @@ function serviceViaje($http, $q) {
  */
 angular
     .module('homer')
-    .service('serviceViaje', serviceViaje)
+    .service('serviceDestino', serviceDestino)
+
+
