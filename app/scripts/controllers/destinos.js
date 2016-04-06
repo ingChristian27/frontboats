@@ -17,6 +17,7 @@ function destinosCtrl($scope, $http, serviceDestino, $modal ) {
     $scope.nombre='';
     $scope.distancia='';
     $scope.descripcion='';
+    $scope.valor=0;
 
     //Cargamos el servidor con las naves existentes
     serviceDestino
@@ -36,14 +37,13 @@ function destinosCtrl($scope, $http, serviceDestino, $modal ) {
         var addDestino = {
             nombre : $scope.nombre,
             distancia : $scope.distancia,
-            descripcion : $scope.descripcion
+            descripcion : $scope.descripcion,
+            valor: $scope.valor
          };
         /* LLamamos al servicio de naves para enviar un json
         *   con los datos agregar al servidor
         *   responde un un nuevo json con el elemento agregado 
         */
-       alert("entro");
-       /*
         serviceDestino
             .addDestino(addDestino)
             .then(function(data) {
@@ -52,7 +52,7 @@ function destinosCtrl($scope, $http, serviceDestino, $modal ) {
             .catch(function(err){
 
             }) 
-        */
+     
          //  Iniciamos las variables del formulario para presentación.
         $('#modal_user').modal('hide');
         $scope.nombre='';

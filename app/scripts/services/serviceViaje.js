@@ -1,4 +1,4 @@
-function serviceViaje($http, $q) {
+function serviceViaje($http, $q, $constants) {
 
     return {
         getAll: getAll,
@@ -9,7 +9,7 @@ function serviceViaje($http, $q) {
         var defered = $q.defer();
         var promise = defered.promise;
 
-        $http.get("http://botescartagena.azurewebsites.net/index-json")
+        $http.get($constants.base+"index-json")
             .success(function(data) {
                 defered.resolve(data);
             })
@@ -24,7 +24,7 @@ function serviceViaje($http, $q) {
         var defered = $q.defer();
         var promise = defered.promise;
 
-        $http.post("http://botescartagena.azurewebsites.net/viajes", viaje)
+        $http.post($constants.base+"viajes", viaje)
             .success(function(data) {
                 defered.resolve(data);
             })

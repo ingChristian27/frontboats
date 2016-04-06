@@ -128,26 +128,22 @@ function navesCtrl($scope, $http, serviceNave, $modal ) {
                         $scope.nave.push($scope.test.naves[i]); 
            
     }
-    $scope.buscar_ruta =function(text){
-         
-           for (i=0; i < $scope.rutas.length; i++)
-                if ($scope.rutas[i].nombre === text)
-                    return [{nombre: $scope.rutas[i].nombre, origen: $scope.rutas[i].origen, destino: $scope.rutas[i].destino }];       
-    }
-       
+  
 
-    $scope.eliminar =function(text){
-    
-           for (i=0; i < $scope.naves.length; i++){
-                if ($scope.naves[i].nombre === text){
-                        $scope.naves.splice(i,1);
-                }  
-           }
-    }
-    $scope.ok = function(){
-        console.log("hola mundo");
-    }
+    $scope.eliminar =function(id){
+      serviceNave
+            .alert(id)
+            .then(function(data) {
+                $scope.test = data;
+            })
+            .catch(function(err){
 
+            }) 
+          
+
+          
+    }
+  
 }
 function ModalInstanceCtrl ($scope, $modalInstance, serviceNave) {
   // INICIANDO VALORES

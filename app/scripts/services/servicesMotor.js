@@ -1,4 +1,4 @@
-function serviceMotor($http, $q) {
+function serviceMotor($http, $q, $constants) {
 
     return {
         getAll: getAll
@@ -8,7 +8,7 @@ function serviceMotor($http, $q) {
         var defered = $q.defer();
         var promise = defered.promise;
 
-        $http.post("http://localhost:8000/buscar-viaje", criterio_busqueda)
+        $http.post($constants.base+"buscar-viaje", criterio_busqueda)
             .success(function(data) {
                 defered.resolve(data);
             })

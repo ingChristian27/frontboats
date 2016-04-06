@@ -46,6 +46,7 @@
                                     <td>{{destino.nombre}}</td>
                                     <td>{{destino.distancia}}</td>
                                     <td>{{destino.descripcion}}</td>
+                                    <td>{{destino.precio}}</td>
                                     <td> <button type="button" class="btn btn-danger btn-xs" ng-click="eliminar(nave.nombre)"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Eliminar</button></td> 
                                 </tr>
                             </tbody>
@@ -75,13 +76,17 @@
                     <div class="row form_modal">
                        <div class="row">
                             <legend>Datos Basicos</legend>
-                            <div class="col-lg-6">
+                            <div class="col-lg-4">
                                 <label >Nombre</label>
                                 <input type="text" class="form-control" ng-model="nombre" >
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-4">
                                 <label >Distancia</label>
-                                <input type="text" class="form-control" ng-model="matricula" >
+                                <input type="text" class="form-control" ng-model="distancia" >
+                            </div>
+                            <div class="col-lg-4">
+                                <label >Valor</label>
+                                <input type="number" class="form-control" ng-model="valor" >
                             </div>
                             <div class="col-lg-12">
                                 <label> Descripción</label>
