@@ -62,6 +62,13 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider) {
                 pageTitle: 'reservas'
             }
         })
+        .state('motor', {
+            url: "/motor",
+            templateUrl: "views/nautimar/motor.html",
+            data: {
+                pageTitle: 'motor'
+            }
+        })
         .state('pasajeros', {
             url: "/reservas",
             templateUrl: "views/nautimar/pasajeros.html",

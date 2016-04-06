@@ -30,6 +30,7 @@
                             <button type="button" class="btn btn-default btn-xs"  data-toggle="modal" data-target="#modal_user"> </span> Agregar</button>
                         </div>
                     </div>
+
                     <div class="table-responsive">
                         <table cellpadding="1" cellspacing="1" class="table">
                             <thead>
@@ -41,10 +42,10 @@
                             </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="nave in test.naves|filter:buscador|orderBy:tipoOrden">
-                                    <td>{{nave.nombre}}</td>
-                                    <td>{{nave.eslora}}</td>
-                                    <td>{{nave.marca}}</td>
+                                <tr ng-repeat="destino in data.destinos|filter:buscador|orderBy:tipoOrden">
+                                    <td>{{destino.nombre}}</td>
+                                    <td>{{destino.distancia}}</td>
+                                    <td>{{destino.descripcion}}</td>
                                     <td> <button type="button" class="btn btn-danger btn-xs" ng-click="eliminar(nave.nombre)"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Eliminar</button></td> 
                                 </tr>
                             </tbody>
@@ -91,7 +92,7 @@
                 </div>
             </div>
       <div class="modal-footer">
-          <button class="btn btn-primary" type="submit" value="Agregar">Guardar</button>
+          <button class="btn btn-primary" type="submit">Guardar</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
       </div>
     </form>

@@ -9,7 +9,7 @@ function serviceDestino($http, $q) {
         var defered = $q.defer();
         var promise = defered.promise;
 
-        $http.get("http://botescartagena.azurewebsites.net/destinosjson")
+        $http.get("http://botescartagena.azurewebsites.net/destinos")
             .success(function(data) {
                 defered.resolve(data);
             })

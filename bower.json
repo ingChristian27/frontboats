@@ -61,6 +61,7 @@
     "chartist": "~0.9.4",
     "angular-chartist.js": "~3.3.9",
     "CodeMirror": "~5.7.0",
-    "angular-ui-codemirror": "~0.3.0"
+    "angular-ui-codemirror": "~0.3.0",
+    "moment": "^2.12.0"
   }
 }
