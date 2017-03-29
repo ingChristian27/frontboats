@@ -55,6 +55,17 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider) {
                 pageTitle: 'destinos'
             }
         })
+        .state('detalle-paquete', {
+            url: "/paquete/{rutaId:string}",
+            access: { requiredAuthentication: true },
+            templateUrl: "views/nautimar/detalle-paquete.html",
+            params: {
+                ruta: null
+            },
+            data: {
+                pageTitle: 'Detalle de la ruta'
+            }
+        })
         .state('reservas', {
             url: "/reservas",
             templateUrl: "views/nautimar/reservas.html",

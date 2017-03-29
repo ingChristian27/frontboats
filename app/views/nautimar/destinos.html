@@ -5,7 +5,7 @@
 <aside id="menu" ng-include="'views/common/navigation.html'"></aside>
 
 <!-- Main Wrapper -->
-<div id="wrapper" ng-controller="destinosCtrl">
+<div id="wrapper" ng-controller="paqueteCtrl">
 
 
     <div class="content" animate-panel>
@@ -14,12 +14,12 @@
             <div class="hpanel">
                 <div class="panel-heading">
                     <i class=" fa glyphicon glyphicon-globe icon_front"></i>
-                    <span class="titulo">Destinos </span>
+                    <span class="titulo">Paquetes </span>
                 </div>
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-8">
-                            <div class="input-group buscador">
+                            <div class="input-group buscador" ng-if="data[0]" >
                                 <div class="input-group-addon">
                                     <span class="glyphicon glyphicon-search" aria-hidden="true"> </span>
                                 </div>
@@ -27,35 +27,66 @@
                             </div>
                         </div>
                         <div class="col-lg-4 text-right">
-                            <button type="button" class="btn btn-default btn-xs"  data-toggle="modal" data-target="#modal_user"> </span> Agregar</button>
+                            <button type="button" 
+                                    class="btn btn-default btn-xs"  
+                                    data-toggle="modal" 
+                                    data-target="#modal_user">
+                                     </span> Agregar
+                            </button>
                         </div>
                     </div>
 
-                    <div class="table-responsive">
+                    <div class="table-responsive" ng-if="data[0]">
                         <table cellpadding="1" cellspacing="1" class="table">
                             <thead>
                             <tr>
                                 <th>Nombre</th>
-                                <th>Distancia</th>
+                                <th>precio</th>
                                 <th>Descripción</th>
-                                <th>Eliminar</th>
+                                <th>tipo</th>
+                                <th>Categoria</th>
+                                <th>Acciones</th>
                             </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="destino in data.destinos|filter:buscador|orderBy:tipoOrden">
-                                    <td>{{destino.nombre}}</td>
-                                    <td>{{destino.distancia}}</td>
-                                    <td>{{destino.descripcion}}</td>
-                                    <td>{{destino.precio}}</td>
-                                    <td> <button type="button" class="btn btn-danger btn-xs" ng-click="eliminar(nave.nombre)"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Eliminar</button></td> 
+                              <tr dir-paginate="paquete in data|itemsPerPage:table_itemsPerPage" total-items="total_count">
+                                    <td>{{paquete.nombre}}</td>
+                                    <td>{{paquete.precio}}</td>
+                                    <td>{{paquete.descripcion}}</td>
+                                    <td>{{paquete.tipo}}</td>
+                                    <td>{{paquete.categoria}}</td>
+                                    <td>
+                                        <button type="button" 
+                                                class="btn btn-danger btn-xs" 
+                                                ng-click="eliminar(paquete._id)">
+                                                <span class="fa fa-times" aria-hidden="true"></span> 
+                                        </button>
+                                        <button type="button"
+                                                class="btn btn-info btn-xs" 
+                                                ng-click="editar(paquete._id)">
+                                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                                        </button>
+                                         <a type="button" 
+                                                class="btn btn-info btn-xs" 
+                                                ui-sref="detalle-paquete({rutaId : paquete._id})">
+                                                <i class="fa fa-info" aria-hidden="true"></i>         
+                                        </a>                     
+                                    </td> 
+                                    
                                 </tr>
                             </tbody>
                         </table>
+                        <dir-pagination-controls
+                                    max-size="8"
+                                    direction-links="true"
+                                    boundary-links="true" 
+                                    on-page-change="getData(newPageNumber)" >
+                        </dir-pagination-controls>
                     </div>
 
                 </div>
                 <div class="panel-footer">
-                   Lista de  Rutas
+                   Mis paquetes
                 </div>
             </div>
         </div>
@@ -78,19 +109,27 @@
                             <legend>Datos Basicos</legend>
                             <div class="col-lg-4">
                                 <label >Nombre</label>
-                                <input type="text" class="form-control" ng-model="nombre" >
+                                <input type="text" class="form-control" ng-model="AgregarPaquete.nombre" >
                             </div>
                             <div class="col-lg-4">
-                                <label >Distancia</label>
-                                <input type="text" class="form-control" ng-model="distancia" >
+                                <label >Capacidad</label>
+                                <input type="text" class="form-control" ng-model="AgregarPaquete.capacidad" >
                             </div>
                             <div class="col-lg-4">
-                                <label >Valor</label>
-                                <input type="number" class="form-control" ng-model="valor" >
+                                <label >precio</label>
+                                <input type="number" class="form-control" ng-model="AgregarPaquete.precio" >
                             </div>
-                            <div class="col-lg-12">
-                                <label> Descripción</label>
-                                <textarea class="form-control" rows="2" ng-model="descripcion"></textarea>
+                            <div class="col-lg-4">
+                                <label> tipo</label>
+                                <input type="text" class="form-control" ng-model="AgregarPaquete.tipo" >
+                            </div>
+                            <div class="col-lg-4">
+                                <label> categoria</label>
+                                <input type="text" class="form-control" ng-model="AgregarPaquete.categoria" >
+                            </div>
+                             <div class="col-lg-12">
+                                <label >descripcion</label>
+                                <textarea class="form-control" rows="2" ng-model="AgregarPaquete.descripcion"></textarea>
                             </div>
                         </div>
                     </div>
@@ -105,6 +144,7 @@
     </div>
   </div>
 </div>
+
 
 
 

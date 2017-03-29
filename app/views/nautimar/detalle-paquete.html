@@ -1,0 +1,260 @@
+<!-- Header -->
+<div id="header" ng-include="'views/common/header.html'"></div>
+
+<!-- Navigation -->
+<aside id="menu" ng-include="'views/common/navigation.html'"></aside>
+
+<!-- Main Wrapper -->
+<div id="wrapper" ng-controller="detallePaqueteCtrl">
+
+
+    <div class="content" animate-panel>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="hpanel">
+                            <div class="panel-heading">
+                                <i class=" fa glyphicon glyphicon-edit icon_front"></i>
+                                <span class="titulo">Detalle </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row projects">
+        <div class="col-lg-6">
+            <div class="hpanel hgreen">
+                <div class="panel-body " >
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <h4><a href=""> {{data.nombre}} - {{data.codigo}}</a></h4>
+                            <p> {{data.descripcion}} </p>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <div class="project-label">Tipo</div>
+                                    <small>{{data.tipo}}</small>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="project-label">Categoria</div>
+                                    <small>{{data.categoria}} </small>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="project-label">Capacidad</div>
+                                    <small>{{data.capacidad}}</small>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="project-label">Activo</div>
+                                    <small>{{data.activo}}</small>
+                                    <progressbar value="65" 
+                                                 type="warning" 
+                                                 class="m-t-xs  full progress-small">
+                                    </progressbar>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 project-info">
+                            <div class="project-action m-t-md">
+                                <div class="btn-group">
+                                    <button class="btn btn-xs btn-default"> Editar</button>
+                                    <button 
+                                            class="btn btn-xs btn-default"
+                                            data-toggle="modal" 
+                                            data-target="#modal_imagenes"> 
+                                            Agregar Imagen
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="project-value">
+                                <h2 class="text-warning">
+                                    ${{data.precio}}
+                                </h2>
+                            </div>
+                            <div class="project-people">
+                                <img alt="logo" class="img-circle" src="images/a7.jpg">
+                                <img alt="logo" class="img-circle" src="images/a8.jpg">
+                                <img alt="logo" class="img-circle" src="images/a3.jpg">
+                                <img alt="logo" class="img-circle" src="images/a2.jpg">
+                                <img alt="logo" class="img-circle" src="images/a5.jpg">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    Additional information about project in footer
+                </div>
+            </div>
+        </div>
+        <div class="row">
+    <div class="col-lg-6">
+        <div class="hpanel">
+            <div class="panel-body container_imagenes" >
+                <div class="lightBoxGallery">
+                   
+                    <a href="images/gallery/1.jpg" 
+                       title="Image from Unsplash" 
+                       data-gallery="">
+                            <img src="images/gallery/1s.jpg">
+                    </a>
+                    <a href="images/gallery/2.jpg" 
+                       title="Image from Unsplash" 
+                       data-gallery="">
+                            <img src="images/gallery/2s.jpg">
+                    </a>
+                    <a href="images/gallery/3.jpg" 
+                       title="Image from Unsplash" 
+                       data-gallery="">
+                            <img src="images/gallery/3s.jpg">
+                    </a>
+                    <a href="images/gallery/4.jpg" 
+                       title="Image from Unsplash" 
+                       data-gallery="">
+                            <img src="images/gallery/4s.jpg">
+                    </a>
+                    <a href="images/gallery/5.jpg" t
+                       itle="Image from Unsplash" 
+                       data-gallery="">
+                            <img src="images/gallery/5s.jpg">
+                    </a>
+                    <a href="images/gallery/6.jpg" 
+                       title="Image from Unsplash" 
+                       data-gallery="">
+                            <img src="images/gallery/6s.jpg">
+                    </a>
+                    
+                </div>
+            </div>
+            <div class="panel-footer">
+                <i class="fa fa-picture-o"> </i> Cambiar Orden
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal_imagenes" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
+    <div class="modal-dialog modal-max" role="document">
+        <div class="modal-content">    
+                <div class="modal-header">
+                    <button type="button" 
+                            class="close" 
+                            ata-dismiss="modal" 
+                            aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">Mis imagenes {{uploader.queue}}</h4>
+                </div>
+          <div class="modal-body">
+                <div class="hpanel">
+                    <input   type="file" 
+                                        nv-file-select="" 
+                                        uploader="uploader" 
+                                        multiple 
+                                        name="file" />
+                                <table class="table" ng-if="uploader.queue[0]">
+                                    <thead>
+                                        <tr>
+                                            <th width="50%">Nombre</th>
+                                            <th ng-show="uploader.isHTML5">Tamaño</th>
+                                            <th ng-show="uploader.isHTML5">Progreso</th>
+                                            <th>Estado</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in uploader.queue">
+                                            <td>
+                                                <strong>{{ item.file.name }}</strong>
+                                                <div ng-show="uploader.isHTML5" 
+                                                     ng-thumb="{ file: item._file, height: 100 }">
+                                                </div>
+                                            </td>
+                                            <td ng-show="uploader.isHTML5" 
+                                                nowrap>
+                                                {{ item.file.size/1024/1024|number:2 }} MB</td>
+                                            <td ng-show="uploader.isHTML5">
+                                                <div class="progress" 
+                                                     style="margin-bottom: 0;">
+                                                     {{item.progress}}
+                                                    <div class="progress-bar" 
+                                                         role="progressbar" 
+                                                         ng-style="{ 'width': item.progress + '%' }">
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="text-center">
+                                                <span ng-show="item.isSuccess">
+                                                    <i class="glyphicon glyphicon-ok"></i>
+                                                </span>
+                                                <span ng-show="item.isCancel">
+                                                `   <i class="glyphicon glyphicon-ban-circle"></i>
+                                                </span>
+                                                <span ng-show="item.isError">
+                                                    <i class="glyphicon glyphicon-remove"></i>
+                                                </span>
+                                            </td>
+                                            <td nowrap>
+                                                <button type="button" 
+                                                        class="btn btn-success btn-xs" 
+                                                        ng-click="item.upload()" 
+                                                        ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+                                                    <span class="glyphicon glyphicon-upload"></span> Cargar
+                                                </button>
+                                            
+                                                <button type="button" 
+                                                        class="btn btn-danger btn-xs" 
+                                                        ng-click="item.remove()">
+                                                    <span class="glyphicon glyphicon-trash"></span> Eliminar
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                 <button class="btn btn-primary" type="submit">Guardar</button>
+                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<!-- The Gallery as lightbox dialog, should be a child element of the document body -->
+<div id="blueimp-gallery" class="blueimp-gallery">
+    <div class="slides"></div>
+    <h3 class="title"></h3>
+    <a class="prev">‹</a>
+    <a class="next">›</a>
+    <a class="close">×</a>
+    <a class="play-pause"></a>
+    <ol class="indicator"></ol>
+</div>
+
+<!-- Local style for demo purpose -->
+    <style>
+        .lightBoxGallery {
+            text-align: center;
+        }
+
+        .lightBoxGallery a {
+            margin: 5px;
+            display: inline-block;
+        }
+    </style>
+
+
+
+
+    <!-- Right sidebar -->
+    <div id="right-sidebar" ng-include="'views/common/right_sidebar.html'" class="sidebar-open" ng-show="rightSidebar"></div>
+
+    <!-- Footer -->
+    <footer class="footer" ng-include="'views/common/footer.html'"></footer>
+
+
+
+</div>
+

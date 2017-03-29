@@ -20,7 +20,7 @@ function motorCtrl($scope, $http, serviceMotor ) {
     $scope.cant_adultos ='';
 
     $scope.buscarViaje =function(){
-        console.log("entro");
+        
          var criterioBusqueda = {
               fecha : $scope.fecha,
               cant_adultos : $scope.cant_adultos

@@ -23,14 +23,19 @@ function serviceViaje($http, $q, $constants) {
     function addViaje  (viaje) {
         var defered = $q.defer();
         var promise = defered.promise;
-
-        $http.post($constants.base+"viajes", viaje)
-            .success(function(data) {
-                defered.resolve(data);
-            })
-            .error(function(err) {
-                defered.reject(err)
-            });
+        
+        $http({
+            method: 'POST',
+            url: $constants.base+"viajes",
+            data: $.param(viaje),
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .success(function(data) {
+            defered.resolve(data);
+        })
+        .error(function(err) {
+            defered.reject(err)
+        });
 
         return promise;
          

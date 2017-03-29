@@ -26,14 +26,10 @@
         'ui.sortable',              // AngularJS ui-sortable
         'ui.footable',              // FooTable
         'angular-chartist',         // Chartist
-        'ui.codemirror'             // Ui Codemirror
+        'ui.codemirror',             // Ui Codemirror
+        'angularUtils.directives.dirPagination',
+        'angularFileUpload'
     ])
-    .service('Viajes', function($http){
-        this.getAll = function(success, failure){
-            $http.get('http://localhost:8000/naves')
-            .success(success)
-            .error(failure);
-        }
-    })
+   
 })();
 

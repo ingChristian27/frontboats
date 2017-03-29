@@ -7,14 +7,18 @@ function serviceMotor($http, $q, $constants) {
     function getAll (criterio_busqueda) {
         var defered = $q.defer();
         var promise = defered.promise;
-
-        $http.post($constants.base+"buscar-viaje", criterio_busqueda)
-            .success(function(data) {
-                defered.resolve(data);
-            })
-            .error(function(err) {
-                defered.reject(err)
-            });
+         $http({
+            method: 'POST',
+            url: $constants.base+"/buscar-disponibilidad",
+            data: $.param(criterio_busqueda),
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .success(function(data) {
+            defered.resolve(data);
+        })
+        .error(function(err) {
+            defered.reject(err)
+        });
 
         return promise;
     }
